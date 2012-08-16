@@ -13,7 +13,7 @@ switch ($action)
 		if (isset($_POST['text']))
 		{
 			include "../core/markdown.php";
-			$text = urldecode($_POST['text']);
+			$text = $_POST['text'];
 			die (Markdown($text));
 		}
 		else
@@ -26,8 +26,7 @@ switch ($action)
 		{
 			$filename = CONTENT . $_POST['file'] . ".md";
 			$isNew = (int)$_POST['isNew'];
-			$text = urldecode($_POST['text']);
-			
+			$text = $_POST['text'];
 			if ($isNew)
 			{
 				if (file_exists($filename))

@@ -178,15 +178,17 @@ code
 {
 	white-space:nowrap;
 	background:#eee;
-	color:#888;
+	color:#777;
 	border-radius:5px;
 	border:1px solid #ddd;
 	padding:2px 2px 0 2px;
 }
 pre code
 {
+	white-space:pre;
 	display:block;
-	padding:5px 10px 2px 5px;
+	line-height:1.1em;
+	padding:5px 10px 3px 5px;
 }
 pre
 {

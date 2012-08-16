@@ -27,7 +27,7 @@ $().ready(function() {
 			{
 				saveFile(
 					function() {//callback when saved
-						loadFile($adminFileSelect.val())
+						loadFile($adminFileSelect.val());
 					});
 			}
 			else
@@ -47,6 +47,18 @@ $().ready(function() {
 			$saveButton.attr("disabled", "disabled");
 		}
 		refreshPreview(this.value);
+	});
+	$adminFileEdit.keydown(function(e) {
+		if (e.keyCode == 9)
+		{
+			var strPos = this.selectionStart;
+			var part_one = this.value.substring(0,strPos);
+			var part_two = this.value.substring(strPos,this.value.length);
+			this.value = part_one + "    " + part_two;
+			this.selectionStart = strPos + 4;
+			this.selectionEnd = this.selectionStart;
+			return false;
+		}
 	});
 	$saveButton.click(function() {
 		saveFile();
@@ -95,7 +107,7 @@ function refreshPreview(text)
 		$.ajax({
 			url:"ajax.php?action=preview",
 			type:'post',
-			data:'text=' + encodeURI(text),
+			data:'text=' + encodeURIComponent(text),
 			success:function(data) {
 				$previewContainer.html(""+data).removeClass("loading");
 			}
@@ -158,10 +170,11 @@ function saveFile(callback)
 	}
 	if (filename)
 	{
+		var text = encodeURIComponent($adminFileEdit.val());
 		$.ajax({
 			url:'ajax.php?action=save',
 			type:'post',
-			data:'file=' + filename + "&isNew=" + parseInt(isNew) + "&text=" + encodeURI($adminFileEdit.val()),
+			data:'file=' + filename + "&isNew=" + parseInt(isNew) + "&text=" + text,
 			success:function(data) {
 				hasChanged = false;
 				if ($.isFunction(callback)) callback();
