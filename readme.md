@@ -9,3 +9,5 @@
 * make frontend
 * restrict access to admin page
 * cache html templates
+* allow file renaming
+* find a way do order articles
