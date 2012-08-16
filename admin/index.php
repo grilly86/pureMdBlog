@@ -33,7 +33,7 @@
 					<td class="adminFileSelect">
 						<select size="10" id="adminFileSelect">
 							<?php foreach ($fileList as $file) : ?>
-							<option value="<?=$file?>"><?=$file?></option>
+							<option value="<?=$file["name"]?>" title="<?=$file["created"]?>"><?=$file["name"]?></option>
 							<?php endforeach; ?>
 						</select>
 						<div class="center">

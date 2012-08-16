@@ -13,6 +13,9 @@ header h1
 {
 	text-align:center;
 	text-transform:uppercase;
+	letter-spacing:2px;
+	color:#ccc;
+	font-weight:normal;
 }
 label
 {
@@ -40,6 +43,9 @@ table
 table th
 {
 	color:#488;
+	font-size:0.8em;
+	text-transform:uppercase;
+	letter-spacing:1.5px;
 }
 table td
 {
@@ -53,8 +59,12 @@ table td
 #adminFileSelect
 {
 	width:100%;
-	padding:5px;
 	font-family:lucida console,monospace;
+}
+#adminFileSelect option
+{
+	display:block;
+	padding:2px 5px;
 }
 .adminFileEdit
 {
@@ -64,6 +74,7 @@ table td
 {
 	display:block;
 	box-sizing:border-box;
+	-moz-box-sizing:border-box;
 	width:100%;
 	padding:5px;
 }
@@ -80,12 +91,21 @@ table td
 	border-radius: 3px 0 0 3px;
 	overflow-y:scroll;
 	padding:3px;
+	position:relative;
 }
-#previewContainer.loading
+#previewContainer div.load
 {
-	background:url(../core/img/loading.gif) center no-repeat #fff;
+	display:none;
 }
-
+#previewContainer.loading::after
+{
+	display:block;
+	content:"";
+	position:absolute;
+	background:url(../core/img/loading.gif) center no-repeat rgba(255,255,255,0.8);
+	top:0;left:0;right:0;bottom:0;z-index:10;
+	border:3px dotted #bbb;
+}
 button
 {
 	padding:6px 8px;
@@ -101,11 +121,11 @@ button
 }
 button[disabled]
 {
-	border-color:#bbb;
-	background:#eee;
-	color:#aaa;
-	cursor:default;
-	box-shadow:none;
+	border-color:#bbb!important;
+	background:#eee!important;
+	color:#aaa!important;
+	cursor:default!important;
+	box-shadow:none!important;
 }
 button.square
 {
@@ -118,11 +138,17 @@ button:focus
 	background:#aaa;
 	color:#fff;
 }
-button:active
+button:hover
 {
 	color:#fff;
 	background:#488;
 	border-color:#fff;
+}
+button:active
+{
+	color:#fff;
+	background:#000;
+	border-color:#488;
 }
 h1,h2,h3,h4,h5,h6
 {

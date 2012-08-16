@@ -62,6 +62,10 @@ $().ready(function() {
 		adjustWindow();
 	});
 	
+	if ($adminFileEdit.val())
+	{
+		refreshPreview($adminFileEdit.val());
+	}
 	$(window).bind('beforeunload',function() {
 		if (hasChanged)
 		{
@@ -78,7 +82,7 @@ function refreshFilelist()
 			var options = eval(data);
 			$adminFileSelect.html('');
 			$(options).each(function() {
-				$adminFileSelect.append('<option value="'+ this + '">' + this + '</option>');
+				$adminFileSelect.append('<option value="'+ this.name + '" title="' + this.created + '">' + this.name + '</option>');
 			});
 		}
 	});
@@ -159,7 +163,6 @@ function saveFile(callback)
 			type:'post',
 			data:'file=' + filename + "&isNew=" + parseInt(isNew) + "&text=" + encodeURI($adminFileEdit.val()),
 			success:function(data) {
-				alert (data +'The file "' + filename + '" has been saved.');
 				hasChanged = false;
 				if ($.isFunction(callback)) callback();
 				$saveButton.attr("disabled","disabled");
@@ -189,7 +192,7 @@ function deleteFile()
 function adjustWindow()
 {
 	var height = $(window).height() - 140;
-	$adminFileSelect.height(height);
+	$adminFileSelect.height(height+10);
 	$adminFileEdit.height(height);
 	$previewContainer.height(height);
 }

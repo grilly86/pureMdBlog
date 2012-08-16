@@ -26,13 +26,13 @@
 						$ext = pathinfo($file,PATHINFO_EXTENSION);
 						if ($ext == $extension)
 						{
-							$file = pathinfo($file,PATHINFO_FILENAME);	// cut .ext from filename end
-							$arr[] = $file;
+							$filename = pathinfo($file,PATHINFO_FILENAME);	// cut .ext from filename end
+							$arr[] = array("name" => $filename, "created" => date("Y-m-d H:i:s",filectime($directory . $file)));
 						}
 					}
 					else
 					{
-						$arr[]  = $file;
+						$arr[]  = array("name" => $file, "created" => date("Y-m-d H:i:s", filectime($directory . $file)));
 					}
 				}
 			}
