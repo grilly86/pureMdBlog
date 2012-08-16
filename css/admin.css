@@ -177,11 +177,11 @@ p
 code
 {
 	white-space:nowrap;
-	background:#eee;
-	color:#777;
+	background:#456;
+	color:#ffe;
 	border-radius:5px;
 	border:1px solid #ddd;
-	padding:2px 2px 0 2px;
+	padding:2px 5px 0 5px;
 }
 pre code
 {

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>
+			nodb - blog
+		</title>
+		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<?php
-		// put your code here
-		?>
+		<?php include "content.php" ?>
 	</body>
 </html>

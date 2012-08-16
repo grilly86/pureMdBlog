@@ -14,7 +14,7 @@ switch ($action)
 		{
 			include "../core/markdown.php";
 			$text = $_POST['text'];
-			die (Markdown($text));
+			die(Markdown($text));
 		}
 		else
 		{
@@ -74,7 +74,7 @@ switch ($action)
 			$filename = CONTENT . $filename . ".md";
 			if (file_exists($filename))
 			{
-				$content = getFileContent($filename);
+				$content = loadFile($filename);
 				die($content);
 			}
 			else

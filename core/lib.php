@@ -1,8 +1,8 @@
 <?php
 	
 	define("CONTENT","../content/");
-
-	function getFileContent($file)
+	
+	function loadFile($file)
 	{
 		$fh = fopen($file, 'r');
 		$data = fread($fh, filesize($file)+1);

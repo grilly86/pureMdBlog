@@ -37,7 +37,10 @@ $().ready(function() {
 		}
 	});
 	$adminFileEdit.keyup(function() {
-		if (this.value !== initText)
+		console.log(this.value);
+		console.log("is not");
+		console.log(initText);
+		if (this.value.toString() != initText)
 		{
 			$saveButton.removeAttr("disabled");
 			hasChanged = true;
@@ -84,8 +87,32 @@ $().ready(function() {
 			return "You have unsaved changes, if you leave the page without saving changes are lost!";
 		}
 	});
+	$(window).keydown(function(e) {
+		if (e.keyCode == 17)	//ctrl
+		{
+			holdStrg = true;
+		}
+		if (e.keyCode == 83)		// 'S'
+		{
+			if (holdStrg && hasChanged)
+			{
+				saveFile();
+				return false;
+			}
+		}
+	});
+	$(window).keyup(function(e) {
+		if (e.keyCode == 17)	//ctrl
+		{
+			holdStrg = false;
+		}
+		
+	});
 	$("table").colResizable({marginRight:"3px",marginLeft:"3px"});
 });
+
+var holdStrg = false;
+
 function refreshFilelist()
 {
 	$.ajax({
@@ -170,6 +197,7 @@ function saveFile(callback)
 	}
 	if (filename)
 	{
+		initText = $adminFileEdit.val();
 		var text = encodeURIComponent($adminFileEdit.val());
 		$.ajax({
 			url:'ajax.php?action=save',
