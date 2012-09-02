@@ -37,14 +37,13 @@
 							<?php endforeach; ?>
 						</select>
 						<div class="center">
-							<button class="square" id="addButton" title="Add content">+</button>
-							<button class="square" id="removeButton" title="Remove file">&ndash;</button>
+							
 						</div>
 					</td>
 					<td class="adminFileEdit">
 						<textarea id="adminFileEdit"></textarea>
 						<div class="center">
-							<button id="saveButton" disabled>Save</button>
+							
 						</div>
 					</td>
 					<td class="adminPreview">
@@ -55,6 +54,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<button class="" id="addButton" title="Add content">+ Add</button>
+		<button class="" id="removeButton" title="Remove file">&ndash; Delete</button>
+		<button class="" id="renameButton" title="Rename file">Rename</button>
+		<button id="saveButton" disabled>Save</button>
 		<script type="text/javascript" src="../js/jquery.js"></script>
 		<script type="text/javascript" src="../js/admin.js"></script>
 	</body>

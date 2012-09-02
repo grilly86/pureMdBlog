@@ -1,3 +1,5 @@
+@import "../css/site.css";
+
 body
 {
 	font-family:tahoma,sans-serif;
@@ -148,57 +150,4 @@ button:active
 	color:#fff;
 	background:#000;
 	border-color:#488;
-}
-h1,h2,h3,h4,h5,h6
-{
-	margin:0 0 5px;
-}
-p
-{
-	margin:8px 0 8px;
-}
-ul,ol
-{
-	margin: 0;
-	padding:0 0 0 30px;
-}
-li
-{
-	margin:0;
-}
-.center
-{
-	text-align:center;
-}
-p
-{
-	line-height:1.5em;
-}
-code
-{
-	white-space:nowrap;
-	background:#456;
-	color:#ffe;
-	border-radius:5px;
-	border:1px solid #ddd;
-	padding:2px 5px 0 5px;
-}
-pre code
-{
-	white-space:pre;
-	display:block;
-	line-height:1.1em;
-	padding:5px 10px 3px 5px;
-}
-pre
-{
-	margin:3px 0 8px;
-}
-blockquote
-{
-	display:block;
-	background:#eee;
-	color:#888;
-	border-radius:5px;
-	border:1px solid #ddd;
 }

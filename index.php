@@ -5,7 +5,7 @@
 		<title>
 			nodb - blog
 		</title>
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<link rel="stylesheet" type="text/css" href="css/site.css" />
 	</head>
 	<body>
 		<?php include "content.php" ?>

@@ -1,5 +1,5 @@
 var currentFile='';
-var initText = '';
+var initText = '';var prevText='';
 var $previewContainer;
 var $adminFileSelect;
 var $adminFileEdit;
@@ -14,6 +14,7 @@ $().ready(function() {
 	$addButton = $('#addButton');
 	$removeButton = $('#removeButton');
 	$saveButton = $('#saveButton');
+	$renameButton = $('#renameButton');
 	
 	$adminFileSelect.change(function() {
 		if (!hasChanged)
@@ -36,20 +37,24 @@ $().ready(function() {
 			}
 		}
 	});
+	
+	$adminFileSelect.val($adminFileSelect.find("option:first").val()).change();
 	$adminFileEdit.keyup(function() {
-		console.log(this.value);
-		console.log("is not");
-		console.log(initText);
 		if (this.value.toString() != initText)
 		{
 			$saveButton.removeAttr("disabled");
 			hasChanged = true;
+			if(this.value.toString() != prevText)
+			{
+				refreshPreview(this.value);
+				prevText = this.value.toString();
+			}
 		}
-		else
+		else if(this.value.toString() == initText.toString())
 		{
 			$saveButton.attr("disabled", "disabled");
 		}
-		refreshPreview(this.value);
+		
 	});
 	$adminFileEdit.keydown(function(e) {
 		if (e.keyCode == 9)
@@ -71,6 +76,16 @@ $().ready(function() {
 	});
 	$removeButton.click(function() {
 		deleteFile();
+	});
+	$renameButton.click(function() {
+		if (currentFile !== "")
+		{
+			renameFile(currentFile);
+		}
+		else
+		{
+			alert("no file selected");
+		}
 	});
 	adjustWindow();
 	$(window).resize(function() {
@@ -118,12 +133,16 @@ function refreshFilelist()
 	$.ajax({
 		url:'ajax.php?action=filelist',
 		success:function(data) {
-			var options = eval(data);
-			$adminFileSelect.html('');
-			$(options).each(function() {
-				$adminFileSelect.append('<option value="'+ this.name + '" title="' + this.created + '">' + this.name + '</option>');
-			});
+			updateFilelist(data);
 		}
+	});
+}
+function updateFilelist(data)
+{
+	var options = eval(data);
+	$adminFileSelect.html('');
+	$(options).each(function() {
+		$adminFileSelect.append('<option value="'+ this.name + '" title="' + this.created + '">' + this.name + '</option>');
 	});
 }
 function refreshPreview(text)
@@ -155,6 +174,7 @@ function loadFile(filename)
 				currentFile = filename;
 				refreshPreview(data);
 				initText = data;
+				prevText = data;
 				hasChanged = false;
 			}
 		});
@@ -178,7 +198,7 @@ function addFile()
 			type:'post',
 			data:'file=' + filename,
 			success:function(data) {
-				refreshFilelist();
+				updateFilelist(data);
 			}
 		});
 	}
@@ -198,6 +218,7 @@ function saveFile(callback)
 	if (filename)
 	{
 		initText = $adminFileEdit.val();
+		prevText = initText;
 		var text = encodeURIComponent($adminFileEdit.val());
 		$.ajax({
 			url:'ajax.php?action=save',
@@ -224,10 +245,27 @@ function deleteFile()
 				type:'post',
 				data:'file=' + filename,
 				success:function(data) {
-					refreshFilelist();
+					updateFilelist(data);
 				}
 			});
 		}
+	}
+}
+function renameFile(oldFilename)
+{
+	var newFilename = prompt("Wählen Sie einen neuen Dateiname",oldFilename);
+	if (newFilename && newFilename !== oldFilename)
+	{
+		$.ajax({
+			url:'ajax.php?action=rename',
+			type:'post',
+			data:'oldFilename=' + encodeURI(oldFilename) + '&newFilename=' + encodeURI(newFilename),
+			success:function(data) {
+				updateFilelist(data);
+				currentFile = newFilename;
+				$adminFileSelect.val(currentFile);
+			}
+		});
 	}
 }
 function adjustWindow()

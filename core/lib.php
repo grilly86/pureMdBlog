@@ -27,12 +27,12 @@
 						if ($ext == $extension)
 						{
 							$filename = pathinfo($file,PATHINFO_FILENAME);	// cut .ext from filename end
-							$arr[] = array("name" => $filename, "created" => date("Y-m-d H:i:s",filectime($directory . $file)));
+							$arr[] = array("name" => urldecode($filename), "created" => date("Y-m-d H:i:s",filectime($directory . $file)));
 						}
 					}
 					else
 					{
-						$arr[]  = array("name" => $file, "created" => date("Y-m-d H:i:s", filectime($directory . $file)));
+						$arr[]  = array("name" => urldecode($file), "created" => date("Y-m-d H:i:s", filectime($directory . $file)));
 					}
 				}
 			}

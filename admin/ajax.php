@@ -36,7 +36,9 @@ switch ($action)
 			}
 			saveFileContent($filename,$text);
 		}
+		//dieFilelist();
 		break;
+		
 	case 'add':
 		if (isset($_POST['file']))
 		{
@@ -51,6 +53,7 @@ switch ($action)
 		{
 			die("no filename specified");
 		}
+		dieFilelist();
 		break;
 	case 'delete':
 		if (isset($_POST['file']))
@@ -61,10 +64,22 @@ switch ($action)
 				unlink($filename);
 			}
 		}
+		dieFilelist();
+		break;
+	case 'rename':
+		if (isset($_POST['oldFilename']) && isset($_POST['newFilename']))
+		{
+			$oldFilename = CONTENT . urlencode($_POST['oldFilename']) . '.md';
+			$newFilename = CONTENT . urlencode($_POST['newFilename']) . '.md';
+			if (file_exists($oldFilename))
+			{
+				rename($oldFilename,$newFilename);
+			}
+		}
+		dieFilelist();
 		break;
 	case 'filelist':
-		$filelist = getFilelist("../content/","md");
-		die(json_encode($filelist));
+		dieFilelist();
 		break;
 	default:
 		// load file:
@@ -87,4 +102,9 @@ switch ($action)
 			die("no filename specified");
 		}
 		break;
+}
+function dieFilelist()
+{
+	$filelist = getFilelist("../content/","md");
+	die(json_encode($filelist));
 }
