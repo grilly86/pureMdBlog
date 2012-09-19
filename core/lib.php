@@ -1,7 +1,6 @@
 <?php
 	
 	define("CONTENT","../content/");
-	
 	function loadFile($file)
 	{
 		$fh = fopen($file, 'r');
@@ -9,9 +8,19 @@
 		fclose($fh);
 		return $data;
 	}
-	function saveFileContent($file,$content)
+	function saveFileContent($file,$content,$cacheFilename)
 	{
 		file_put_contents($file,$content);
+		// write html-cache:
+		include_once "../core/markdown.php";
+		if (file_put_contents($cacheFilename,Markdown($content)))
+		{
+			echo "cache gespeichert";
+		}
+		else
+		{
+			echo "cache nicht gespeichert";
+		}
 	}
 	function getFilelist($directory,$extension="")
 	{

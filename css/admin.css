@@ -93,6 +93,7 @@ table td
 	overflow-y:scroll;
 	padding:3px;
 	position:relative;
+	text-align:left;
 }
 #previewContainer div.load
 {

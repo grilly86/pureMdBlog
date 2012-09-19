@@ -13,7 +13,7 @@ switch ($action)
 		if (isset($_POST['text']))
 		{
 			include "../core/markdown.php";
-			$text = $_POST['text'];
+			$text = strip_tags($_POST['text']);
 			die(Markdown($text));
 		}
 		else
@@ -24,9 +24,13 @@ switch ($action)
 	case 'save':
 		if (isset($_POST['file']) && isset($_POST['isNew']) && isset($_POST['text']))
 		{
-			$filename = CONTENT . $_POST['file'] . ".md";
+			$file = $_POST['file'];
+			
+			// SAVE MD FILE
+			$filename = CONTENT . $file . ".md";
+			
 			$isNew = (int)$_POST['isNew'];
-			$text = $_POST['text'];
+			$text = strip_tags($_POST['text']);
 			if ($isNew)
 			{
 				if (file_exists($filename))
@@ -34,7 +38,8 @@ switch ($action)
 					die("filename already exists!");
 				}
 			}
-			saveFileContent($filename,$text);
+			$cacheFilename = CONTENT . "cache/" . $file . ".html";
+			saveFileContent($filename,$text,$cacheFilename);
 		}
 		//dieFilelist();
 		break;
