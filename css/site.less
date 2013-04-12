@@ -1,5 +1,23 @@
-@color: #689;
+@color: #85c;
+@color2: #ad7;
 @textShadowColor: #ccc;
+@backgroundColor:#ccc;
+@backgroundImage:url(img/background.gif);
+
+@contentBackgroundImage:none;
+@contentBackgroundColor:#eee;
+
+@borderRadius:10px;
+
+@font:'Open Sans',verdana,sans-serif;
+@normalSize:14px;
+
+@headFont:'Emilys Candy',serif;
+@headSize:32px;
+
+@import url(../js/socialshareprivacy/socialshareprivacy.css);
+@import url(http://fonts.googleapis.com/css?family=Emilys+Candy);
+
 *
 {
 	margin:0;
@@ -9,9 +27,27 @@ body
 {
 	font-family:sans-serif;
 	padding:10px;
-	background:url(img/background.gif);
+	background-color:@backgroundColor;
+	background-image:@backgroundImage;
 	text-align:center;
+
+
+	font-family:@font;
 }
+
+h1,h2,h3,h4,h5,h6
+{
+	font-family:@headFont;
+}
+h1, h1 a
+{
+	font-size:@headSize;
+	color:@color2;
+	margin:0;
+	font-weight:normal;
+}
+
+
 a
 {
 	color:@color;
@@ -29,37 +65,54 @@ a:hover
 hr
 {
 	margin:5px 0;
-	height:5px;
-	background:#7aa;
-	border-bottom:3px solid @color;
+	height:2px;
+	background:@color;
+	border:none;//3px solid @color;
+	outline:0;
 }
-h1.section
+
+
+h1.section, h1.section a
 {
-	text-align:center;
-	text-transform:uppercase;
-	letter-spacing:3px;
+	//background-color:#fff;
 	color:@color;
-	/*margin:10px 0 10px 0;*/
-	margin:0;
-	border-bottom:3px solid @color;
-	text-shadow:0 1px 0 @textShadowColor;
-	box-shadow:0 1px 0 @textShadowColor;
+	text-align:center;
+	border-bottom:2px solid @color;
+	padding: 0 0 10px 0;
+	font-weight:bold;
+	font-size: 24px;
+	
 }
+
+div.articleCreatedDate
+{
+	position:absolute;
+	top:0;
+	font-family:@headFont;
+	right:0;
+	color:white;
+	.transform(translateX(60px) translateY(40px) rotate(90deg));
+}
+
 div.article
 {
+	position:relative;
 	margin:0 auto;
 	display:block;
-	background:url(img/content.gif);
+	//background:url(img/content.gif);
+
+	background-image:@contentBackgroundImage;
+	background-color:@contentBackgroundColor;
 	padding:10px;
 	width:800px;
-	border-radius:10px;
+	border-radius:@borderRadius;
 	margin-bottom:20px;
 	box-shadow:0 -3px 5px rgba(0,0,0,0.6),0 3px 5px rgba(255,255,255,0.3);
 }
-div.article h1
+div.article h1, div.article h1 a
 {
 	margin-top:3px;
-	font-size:1.5em;
+	font-size:22px;
 }
 div.article h2
 {
@@ -83,13 +136,6 @@ div.article p
 	margin-top:8px;
 	margin-bottom:8px;
 }
-code
-{
-	color:#fee;
-	padding:3px 5px 1px;
-	background:#677;
-	border-radius:5px;
-}
 pre code
 {
 	margin:5px;
@@ -102,6 +148,7 @@ pre code
 #contentContainer img
 {
 	box-shadow:2px 2px 10px rgba(0,0,0,0.2);
+	max-width:100%;
 }
 h1,h2,h3,h4,h5,h6
 {
@@ -143,9 +190,9 @@ p
 code
 {
 	white-space:nowrap;
-	background:#456;
-	color:#ffe;
-	border-radius:5px;
+	background:#f3f3f3;
+	color:#448;
+	border-radius:@borderRadius;
 	border:1px solid #ddd;
 	padding:2px 5px 0 5px;
 }
@@ -167,7 +214,7 @@ blockquote
 	color:#888;
 	margin:6px 10px;
 	line-height:1.1em;
-	border-radius:5px;
+	border-radius:@borderRadius;
 	border:1px solid #bbb;
 	box-shadow:0px 1px 4px rgba(0,0,0,0.2);
 }
@@ -176,3 +223,23 @@ blockquote p
 	padding:2px 8px 1px;
 	margin:0;
 }
+
+.articleModifiedDate
+{
+	font-size:8pt;
+	color:#ccc;
+}
+
+
+
+// MIXINS
+
+.transform(@args)
+{
+	transform:@args;
+	-webkit-transform:@args;
+	-moz-transform:@args;
+	-o-transform:@args;
+	-ms-transform:@args;
+}
+

@@ -2,4 +2,4 @@ php_value register_globals 0
 
 RewriteEngine on
 
-RewriteRule ^([^/]*)$ index.php?file=$1&%{QUERY_STRING} [L]
+RewriteRule ^article/([^/]*)$ index.php?file=$1&%{QUERY_STRING} [L]

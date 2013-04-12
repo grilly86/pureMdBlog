@@ -139,7 +139,7 @@ function refreshFilelist()
 }
 function updateFilelist(data)
 {
-	var options = eval(data);
+	var options = $.parseJSON(data);
 	$adminFileSelect.html('');
 	$(options).each(function() {
 		$adminFileSelect.append('<option value="'+ this.name + '" title="' + this.created + '">' + this.name + '</option>');

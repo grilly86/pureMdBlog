@@ -13,7 +13,7 @@ switch ($action)
 		if (isset($_POST['text']))
 		{
 			include "../core/markdown.php";
-			$text = strip_tags($_POST['text']);
+			$text = $_POST['text'];
 			die(Markdown($text));
 		}
 		else
@@ -30,7 +30,7 @@ switch ($action)
 			$filename = CONTENT . $file . ".md";
 			
 			$isNew = (int)$_POST['isNew'];
-			$text = strip_tags($_POST['text']);
+			$text = $_POST['text'];
 			if ($isNew)
 			{
 				if (file_exists($filename))
@@ -74,11 +74,21 @@ switch ($action)
 	case 'rename':
 		if (isset($_POST['oldFilename']) && isset($_POST['newFilename']))
 		{
-			$oldFilename = CONTENT . urlencode($_POST['oldFilename']) . '.md';
-			$newFilename = CONTENT . urlencode($_POST['newFilename']) . '.md';
+			$oldFilename = CONTENT . urldecode($_POST['oldFilename']) . '.md';
+			$newFilename = CONTENT . urldecode($_POST['newFilename']) . '.md';
+			
+			$oldFilenameCache = CONTENT ."cache/" .  urldecode($_POST['oldFilename']) . '.html';
+			$newFilenameCache = CONTENT ."cache/". urldecode($_POST['newFilename']) . '.html';
+			
 			if (file_exists($oldFilename))
 			{
 				rename($oldFilename,$newFilename);
+				rename($oldFilenameCache,$newFilenameCache);
+				
+			}
+			else
+			{
+				die('{error:"ERROR:file ' . $oldFilename . ' not found!"}');
 			}
 		}
 		dieFilelist();
