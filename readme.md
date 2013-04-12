@@ -1,13 +1,10 @@
 # PureMdBlog
-(Pure file markdown blogging system)
+Pure file markdown blog system (no database needed)
 
-* State: very early 'Work in Progress'
+* State: very early stage
 * Created: 2012-08-16
 
 ## Todo
 
-* make frontend
 * restrict access to admin page
-* cache html templates
-* allow file renaming
-* find a way do order articles
+* paginate
